@@ -1,7 +1,11 @@
 from django.shortcuts import render
 
 def main(request):
-    return render(request, 'mainapp/index.html')
+    context = {
+        'first_line': 'Информация, отображаемая на главной странице',
+        'second_word': 'второе слово',
+    }
+    return render(request, 'mainapp/index.html', context)
     
 
 def products(request):
