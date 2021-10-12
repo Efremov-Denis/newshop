@@ -4,11 +4,19 @@
 	Магазин
 {% endblock %}
 {% block content %}
-Информация только для главной страницы!
-<br>
-{{ first_line }}
+{% for product in products %}
+  <div class="block">
+    <a href="#">
+      <img src="/media/{{ product.image }}" alt="{{ product.short_desc }}"> 
+      <div class="text">
+        <h3>{{ product.category.name }}</h3>        
+        <h4>{{ product.name }}</h4>
+        <p>{{ product.description }}</p>
+      </div>
+    </a>
+  </div>
+{% endfor %}
 {% endblock %}
-
 	<div class="container">
 		<div class="slider">
 			<div class="header clearfix">
