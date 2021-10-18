@@ -24,7 +24,8 @@ urlpatterns = [
     path('products/', mainapp.products, name='products'),
     path('contacts/', mainapp.contacts, name='contacts'),
     path('admin/', admin.site.urls),
-    path('auth/', include('authapp.urls', namespace='auth'))
+    path('auth/', include('authapp.urls', namespace='auth')),
+    path('basket/', include('basketapp.urls', namespace='basket'))
 ]
 
 if settings.DEBUG:
