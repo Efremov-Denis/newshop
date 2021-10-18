@@ -1,3 +1,4 @@
+<a href="{% url 'main' %}" class="logo"></a>
 <ul class="menu">
 	<li><a href="/" class="active">домой</a></li>
 	<li><a href="{% url 'products' %}">продукты</a>
@@ -17,3 +18,9 @@
       <a href="{% url 'auth:login' %}">войти</a>
     {% endif %}
 </li>
+<a href="#" class="search"></a>
+<a href="{% url 'basket:view' %}" class="basket">
+    <span>
+        {% if basket %} {{ basket|length }} {% endif %}
+    </span>
+</a>

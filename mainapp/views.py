@@ -43,5 +43,27 @@ def products(request, pk=None):
     
     return render(request, 'mainapp/products.html', context)
 
+    basket = []
+    if request.user.is_authenticated:
+        basket = Basket.objects.filter(user=request.user)
+            
+    if pk:
+        if pk == '0':
+            products = Product.objects.all().order_by('price')
+            category = {'name': 'все'}
+        else:
+            category = get_object_or_404(ProductCategory, pk=pk)
+            products = Product.objects.filter(category__pk=pk).order_by('price')
+        
+        context = {
+            'title': title,
+            'links_menu': links_menu,
+            'category': category,
+            'products': products,
+            'basket': basket,
+        }
+        
+        return render(request, 'mainapp/products_list.html', context)
+
 def contacts(request):
     return render(request, 'mainapp/contacts.html')
