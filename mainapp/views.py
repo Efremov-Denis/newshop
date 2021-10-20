@@ -67,3 +67,15 @@ def products(request, pk=None):
 
 def contacts(request):
     return render(request, 'mainapp/contacts.html')
+
+def product(request, pk):
+    title = 'продукты'
+    
+    content = {
+        'title': title, 
+        'links_menu': ProductCategory.objects.all(), 
+        'product': get_object_or_404(Product, pk=pk), 
+        'basket': get_basket(request.user),
+    }
+
+    return render(request, 'mainapp/product.html', content)

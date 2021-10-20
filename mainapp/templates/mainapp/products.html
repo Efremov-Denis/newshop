@@ -4,10 +4,6 @@
 	Каталог
 {% endblock %}
 
-
-
-
-
 	<div class="container">
 		<div class="hero-white">
 			<div class="header clearfix">
@@ -18,7 +14,7 @@
 					<li><a href="/contacts/">контакты</a></li>
 				</ul>
 				<a href="#" class="search"></a>
-                <a href="#" class="basket"></a>
+                        <a href="{% url 'products:product' product.pk %}" class="red-button"></a>
 			</div>
 		</div>
 
