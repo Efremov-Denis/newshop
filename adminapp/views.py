@@ -4,7 +4,9 @@ from mainapp.models import Product, ProductCategory
 from django.urls import reverse
 from authapp.forms import ShopUserRegisterForm
 from adminapp.forms import ShopUserAdminEditForm
+from django.contrib.auth.decorators import user_passes_test
 
+@user_passes_test(lambda u: u.is_superuser)
 def users(request):
     title = 'админка/пользователи'
 
