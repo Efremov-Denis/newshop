@@ -5,20 +5,13 @@ from django.urls import reverse
 from authapp.forms import ShopUserRegisterForm
 from adminapp.forms import ShopUserAdminEditForm, ProductEditForm
 from django.contrib.auth.decorators import user_passes_test
+from django.views.generic import ListView
 
-@user_passes_test(lambda u: u.is_superuser)
-def users(request):
-    title = 'админка/пользователи'
 
-    users_list = ShopUser.objects.all().order_by('-is_active', '-is_superuser', '-is_staff', 'username')
-
-    context = {
-        'title': title,
-        'objects': users_list
-    }
-
-    return render(request, 'adminapp/users.html', context)
-
+class UsersListView(ListView):
+    model = ShopUser
+    context_object_name = 'objects'
+    template_name = 'adminapp/users.html'
 
 def user_create(request):
     title = 'пользователи/создание'
