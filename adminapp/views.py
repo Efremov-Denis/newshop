@@ -5,7 +5,7 @@ from django.urls import reverse
 from authapp.forms import ShopUserRegisterForm
 from adminapp.forms import ShopUserAdminEditForm, ProductEditForm
 from django.contrib.auth.decorators import user_passes_test
-from django.views.generic import ListView
+from django.views.generic import ListView, CreateView
 
 
 class UsersListView(ListView):
@@ -13,21 +13,12 @@ class UsersListView(ListView):
     context_object_name = 'objects'
     template_name = 'adminapp/users.html'
 
-def user_create(request):
-    title = 'пользователи/создание'
 
-    if request.method == 'POST':
-        user_form = ShopUserRegisterForm(request.POST, request.FILES)   
-        if user_form.is_valid():
-            user_form.save()
-            return HttpResponseRedirect(reverse('admin:users'))
-    else:
-        user_form = ShopUserRegisterForm()
-    
-    context = {'title': title, 'update_form': user_form}
-    
-    return render(request, 'adminapp/user_update.html', context)
-
+class UserCreate(CreateView):
+    model = ShopUser
+    template_name = 'adminapp/users.html'
+    fields = ['avatar', 'age']
+   
 def user_update(request, pk):
     title = 'пользователи/редактирование'
 
