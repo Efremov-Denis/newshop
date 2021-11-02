@@ -5,7 +5,7 @@ from django.urls import reverse
 from authapp.forms import ShopUserRegisterForm
 from adminapp.forms import ShopUserAdminEditForm, ProductEditForm
 from django.contrib.auth.decorators import user_passes_test
-from django.views.generic import ListView, CreateView
+from django.views.generic import ListView, CreateView, UpdateView, DetailView
 
 
 class UsersListView(ListView):
@@ -19,6 +19,7 @@ class UserCreate(CreateView):
     template_name = 'adminapp/users.html'
     fields = ['avatar', 'age']
    
+
 def user_update(request, pk):
     title = 'пользователи/редактирование'
 
@@ -36,6 +37,7 @@ def user_update(request, pk):
     context = {'title': title, 'update_form': edit_form}
     
     return render(request, 'adminapp/user_update.html', context)
+
 
 def user_delete(request, pk):
     title = 'пользователи/удаление'
